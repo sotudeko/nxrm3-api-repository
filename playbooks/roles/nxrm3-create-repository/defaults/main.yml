@@ -1,0 +1,54 @@
+---
+# defaults file for nxrm3-create-repository
+
+nexus_docker_hosted_port: 9080
+nexus_docker_proxy_port: 9081
+nexus_docker_group_port: 9082
+
+# Nexus blobstore config
+nexus_blob_names:           
+  pypi:
+    blob: 'default'
+  raw:
+    blob: 'default'
+  docker:
+    blob: 'docker'
+  ruby:
+    blob: 'default'
+  bower:
+    blob: 'default'
+  npm:
+    blob: 'default'
+  mvn:
+    blob: 'default'
+  gitlfs:
+    blob: 'default'
+
+# Docker support
+_nexus_repos_docker_defaults:
+  blob_store: "{{ nexus_blob_names.docker.blob }}"
+  strict_content_validation: true
+  version_policy: release # release, snapshot or mixed
+  layout_policy: strict # strict or permissive
+  write_policy: allow_once # allow_once or allow
+
+nexus_repos_docker_hosted:
+  - name: docker-hosted
+    http_port: "{{ nexus_docker_hosted_port }}"
+    v1_enabled: True
+
+nexus_repos_docker_proxy:
+  - name: "{{ repository_name }}"
+    http_port: "{{ nexus_docker_proxy_port }}"
+    v1_enabled: True
+    index_type: "HUB"
+    proxy_url: "https://registry-1.docker.io"
+    use_nexus_certificates_to_access_index: false
+
+nexus_repos_docker_group:
+  - name: docker-group
+    http_port: "{{ nexus_docker_group_port }}"
+    v1_enabled: True
+    member_repos: "{{ members }}"
+
+

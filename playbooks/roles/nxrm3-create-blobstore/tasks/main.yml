@@ -1,0 +1,24 @@
+---
+# tasks file for nxrm3-create-blobstore
+
+- fail: 
+    msg: "The variable 'blob path' is not defined"
+  when: blob_root_path is undefined
+
+- name: Check path to blob store exists
+  stat:
+    path: "{{ blob_root_path }}"
+  register: blob_path
+  
+- fail: 
+    msg: "Root path {{ blob_root_path }} does not exist"
+  when: 
+    - not blob_path.stat.exists 
+ 
+- fail: 
+    msg: "Root path {{ blob_root_path }} is not a directory"
+  when: 
+    - not blob_path.stat.isdir
+ 
+- include: tasks/run_script.yml
+  with_items: "{{ nxrm3_blobstore }}"

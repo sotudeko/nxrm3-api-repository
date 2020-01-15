@@ -1,0 +1,8 @@
+- hosts: nxrm3_controller
+  roles:
+  - { role: nxrm3-create-blobstore, script_name: 'create_blobstore' }
+  
+
+    
+
+

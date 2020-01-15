@@ -1,0 +1,10 @@
+- hosts: nxrm3_controller
+  vars:
+    repo_type: create_repo_{{ format }}_{{ type }}
+  roles:
+  - { role: nxrm3-create-repository, script_name: "{{ repo_type }}" }
+  
+
+    
+
+

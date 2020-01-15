@@ -1,0 +1,5 @@
+---
+# tasks file for nxrm3-create-repository
+
+- include: tasks/run_script.yml
+  with_items: "{{ _nexus_repos_docker_defaults|combine(nexus_repos_docker_proxy) }}"

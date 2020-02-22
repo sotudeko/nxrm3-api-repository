@@ -1,9 +1,0 @@
----
-# defaults file for nxrm3-create-blobstore
-
-blob_root_path: /opt/nxrm3/sonatype-work/nexus3/blobs
-
-nxrm3_blobstore:
-  - name: "{{ blob_name }}-name"
-    path: "{{ blob_root_path}}/{{ blob_name }}-path"
-    type: file

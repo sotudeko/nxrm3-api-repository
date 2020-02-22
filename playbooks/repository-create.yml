@@ -1,19 +1,19 @@
 ---
 - hosts: all
   tasks:
-    - name: get stuff
+    - name: get repository data
       include_vars:
         file: "{{ nxrm3_data_file }}"
         name: nxrm3_data
         
-    - name: display include_vars
+    - name: display repository info
       debug: msg="{{ nxrm3_data }}"
 
-    - name: Creating
+    - name: Creating repository {{ nxrm3_data.name }}
       uri:
-        url: "http://localhost:8081/service/rest/beta/repositories/{{ nxrm3_repo_format }}/{{ nxrm3_repo_type }}"
-        user: "admin"
-        password: "admin123"
+        url: "{{ nxrm3_item.host }}:{{ nxrm3_item.port }}/{{ nxrm3_repository_api }}/{{ nxrm3_repo_format }}/{{ nxrm3_repo_type }}"
+        user: "{{ nxrm3_item.user }}"
+        password: "{{ nxrm3_item.passwd }}"
         headers:
             Content-Type: "application/json"
             Accept: "application/json"
@@ -22,16 +22,11 @@
         force_basic_auth: yes
         body_format: json
         body: "{{ nxrm3_data }}"
+      loop: "{{ nxrm3_instances }}"
+      loop_control:
+        loop_var: nxrm3_item
       register: op
         
     - debug:
         var: op
         
-    
-    
-      
-  # roles:
-  #   - { role: nxrm3-api-repository-create, nxrm3_data: "{{ nxrm3_data }}", nxrm3_api: "{{ nxrm3_repository_api }}", nxrm3_repo_format: 'maven', nxrm3_repo_type: 'proxy'}
-      
-
-

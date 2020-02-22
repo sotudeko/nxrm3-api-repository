@@ -1,0 +1,40 @@
+{
+  "name": "maven-proxy-repo-4",
+  "online": true,
+  "storage": {
+    "blobStoreName": "maven",
+    "strictContentTypeValidation": true
+  },
+  
+  "proxy": {
+    "remoteUrl": "https://repo1.maven.org/maven2",
+    "contentMaxAge": 1440,
+    "metadataMaxAge": 1440
+  },
+  "negativeCache": {
+    "enabled": false,
+    "timeToLive": 1440
+  },
+  "httpClient": {
+    "blocked": false,
+    "autoBlock": false,
+    "connection": {
+      "retries": 0,
+      "userAgentSuffix": "string",
+      "timeout": 60,
+      "enableCircularRedirects": false,
+      "enableCookies": false
+    },
+    "authentication": {
+      "type": "username",
+      "username": "string",
+      "ntlmHost": "string",
+      "ntlmDomain": "string"
+    }
+  },
+  "routingRule": "string",
+  "maven": {
+    "versionPolicy": "MIXED",
+    "layoutPolicy": "STRICT"
+  }
+}

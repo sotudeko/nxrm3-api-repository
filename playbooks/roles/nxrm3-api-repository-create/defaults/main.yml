@@ -1,0 +1,9 @@
+---
+# defaults file for nxrm3-api-repository-create
+
+nxrm3_maven_hosted:
+    name: "{{ repo_name }}"
+    online: true
+    storage: "{{ repo_storage }}"
+    maven: "{{ repo_maven }}"
+  

@@ -1,0 +1,9 @@
+---
+
+nxrm3_instances:
+  - name: local
+    host: http://localhost
+    port: 8081
+    user: admin
+    passwd: admin123
+
